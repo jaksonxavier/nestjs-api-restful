@@ -13,6 +13,14 @@ export class User extends Entity<UserProps> {
     return this.props.email;
   }
 
+  get name() {
+    return this.props.name;
+  }
+
+  set name(value: string) {
+    this.props.name = value;
+  }
+
   static create(props: UserProps, id?: UniqueEntityID) {
     const user = new User(props, id);
 
