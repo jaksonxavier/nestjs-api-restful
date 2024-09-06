@@ -29,7 +29,9 @@ export class InMemoryUsersRepository implements UsersRepository {
   }
 
   async save(user: User): Promise<void> {
-    throw new Error('Method not implemented.');
+    const itemIndex = this.items.findIndex((item) => item.id === user.id);
+
+    this.items[itemIndex] = user;
   }
 
   async delete(id: string): Promise<void> {
