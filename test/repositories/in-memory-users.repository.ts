@@ -35,6 +35,8 @@ export class InMemoryUsersRepository implements UsersRepository {
   }
 
   async delete(id: string): Promise<void> {
-    throw new Error('Method not implemented.');
+    const itemIndex = this.items.findIndex((item) => item.id.toValue() === id);
+
+    this.items.splice(itemIndex, 1);
   }
 }
