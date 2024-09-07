@@ -1,4 +1,4 @@
-import { UsersRepository } from '@domain/repositories/users.repository';
+import { UsersRepository } from '@application/repositories/users.repository';
 import { GetUserByIdUseCase } from './get-user-by-id.use-case';
 import { InMemoryUsersRepository } from '@test/repositories/in-memory-users.repository';
 import { makeUser } from '@test/factories/make-user.factory';

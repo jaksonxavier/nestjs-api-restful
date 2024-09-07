@@ -1,6 +1,6 @@
 import { InMemoryUsersRepository } from '@test/repositories/in-memory-users.repository';
 import { CreateUserUseCase } from './create-user.use-case';
-import { UsersRepository } from '@domain/repositories/users.repository';
+import { UsersRepository } from '@application/repositories/users.repository';
 import { User } from '@domain/entities/user.entity';
 import { makeUser } from '@test/factories/make-user.factory';
 import { UserAlreadyRegisteredError } from './errors/user-already-registered.error';

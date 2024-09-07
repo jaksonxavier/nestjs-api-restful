@@ -1,4 +1,4 @@
-import { UsersRepository } from '@domain/repositories/users.repository';
+import { UsersRepository } from '@application/repositories/users.repository';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()

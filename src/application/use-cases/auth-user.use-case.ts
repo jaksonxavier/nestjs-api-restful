@@ -1,7 +1,7 @@
 import { Either, left, right } from '@core/either';
 import { WrongCredentialsError } from './errors/wrong-credentials-error';
 import { Injectable } from '@nestjs/common';
-import { UsersRepository } from '@domain/repositories/users.repository';
+import { UsersRepository } from '@application/repositories/users.repository';
 import { HashComparer } from '@application/cryptography/hash-comparer';
 import { Encrypter } from '@application/cryptography/encrypter';
 
