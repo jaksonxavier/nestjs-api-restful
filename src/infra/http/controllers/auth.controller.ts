@@ -20,6 +20,8 @@ const authBodySchema = z.object({
 
 type AuthBodySchema = z.infer<typeof authBodySchema>;
 
+const ERROR_DELAY_IN_SECONDS = 5;
+
 @Controller('/auth')
 @Public()
 export class AuthController {
@@ -38,6 +40,11 @@ export class AuthController {
 
     if (output.isLeft()) {
       const error = output.value;
+
+      // Delay for the configured duration before throwing the exception
+      await new Promise((resolve) =>
+        setTimeout(resolve, ERROR_DELAY_IN_SECONDS * 1000),
+      );
 
       switch (error.constructor) {
         case WrongCredentialsError:
