@@ -24,6 +24,9 @@
       "@domain/*": [
         "./src/domain/*"
       ],
+      "@infra/*": [
+        "./src/infra/*"
+      ],
       "@test/*": [
         "./test/*"
       ],

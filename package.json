@@ -74,6 +74,7 @@
     "moduleNameMapper": {
       "^@core/(.*)$": "<rootDir>/../src/core/$1",
       "^@domain/(.*)$": "<rootDir>/../src/domain/$1",
+      "^@infra/(.*)$": "<rootDir>/../src/infra/$1",
       "^@test/(.*)$": "<rootDir>/../test/$1"
     }
   }
