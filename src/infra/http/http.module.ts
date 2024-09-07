@@ -10,6 +10,8 @@ import { DeleteUserController } from './controllers/delete-user.controller';
 import { DeleteUserByIdUseCase } from '@application/use-cases/delete-user-by-id.use-case';
 import { CryptographyModule } from '@infra/cryptography/cryptography.module';
 import { AuthModule } from '@infra/auth/auth.module';
+import { AuthController } from './controllers/auth.controller';
+import { AuthUserUseCase } from '@application/use-cases/auth-user.use-case';
 
 @Module({
   imports: [DatabaseModule, CryptographyModule, AuthModule],
@@ -18,12 +20,14 @@ import { AuthModule } from '@infra/auth/auth.module';
     GetUserController,
     EditUserController,
     DeleteUserController,
+    AuthController,
   ],
   providers: [
     CreateUserUseCase,
     GetUserByIdUseCase,
     EditUserUseCase,
     DeleteUserByIdUseCase,
+    AuthUserUseCase,
   ],
 })
 export class HttpModule {}
