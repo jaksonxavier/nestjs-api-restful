@@ -8,9 +8,10 @@ import { EditUserController } from './controllers/edit-user.controller';
 import { EditUserUseCase } from '@application/use-cases/edit-user.use-case';
 import { DeleteUserController } from './controllers/delete-user.controller';
 import { DeleteUserByIdUseCase } from '@application/use-cases/delete-user-by-id.use-case';
+import { CryptographyModule } from '@infra/cryptography/cryptography.module';
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [DatabaseModule, CryptographyModule],
   controllers: [
     CreateUserController,
     GetUserController,

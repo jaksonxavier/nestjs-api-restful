@@ -3,6 +3,7 @@ import { UsersRepository } from '@domain/repositories/users.repository';
 import { User } from '@domain/entities/user.entity';
 import { UserAlreadyRegisteredError } from './errors/user-already-registered.error';
 import { Injectable } from '@nestjs/common';
+import { HashGenerator } from '@application/cryptography/hash-generator';
 
 interface CreateUserUseCaseInput {
   name: string;
@@ -14,7 +15,10 @@ type CreateUserUseCaseOutput = Either<UserAlreadyRegisteredError, User>;
 
 @Injectable()
 export class CreateUserUseCase {
-  constructor(private readonly usersRepository: UsersRepository) {}
+  constructor(
+    private readonly usersRepository: UsersRepository,
+    private readonly hashGenerator: HashGenerator,
+  ) {}
 
   async perform({
     name,
@@ -28,16 +32,17 @@ export class CreateUserUseCase {
       return left(new UserAlreadyRegisteredError(email));
     }
 
+    const hashedPassword = await this.hashGenerator.hash(password);
+
     /**
      * @TODO
      * Generate a unique slug for the user based on the name.
-     * Implement password hashing or salting for security.
      */
     const user = User.create({
       name,
       slug: email.split('@').at(0),
       email,
-      password,
+      password: hashedPassword,
     });
 
     await this.usersRepository.create(user);
