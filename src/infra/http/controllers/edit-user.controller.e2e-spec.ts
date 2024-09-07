@@ -1,0 +1,51 @@
+import { INestApplication } from '@nestjs/common';
+import { Test } from '@nestjs/testing';
+
+import * as request from 'supertest';
+import { HttpModule } from '../http.module';
+import { UserFactory } from '@test/factories/make-user.factory';
+import { DatabaseModule } from '@infra/database/database.module';
+import { PrismaService } from '@infra/database/prisma/prisma.service';
+
+describe('Edit User (E2E)', () => {
+  let app: INestApplication;
+  let prisma: PrismaService;
+  let userFactory: UserFactory;
+
+  beforeAll(async () => {
+    const moduleRef = await Test.createTestingModule({
+      imports: [HttpModule, DatabaseModule],
+      providers: [UserFactory],
+    }).compile();
+
+    app = moduleRef.createNestApplication();
+
+    prisma = moduleRef.get(PrismaService);
+    userFactory = moduleRef.get(UserFactory);
+
+    await app.init();
+  });
+
+  test('[PUT] /users/:userId', async () => {
+    const user = await userFactory.makePrismaUser({
+      name: 'Robin',
+    });
+
+    const editedName = 'Nico Robin';
+    const response = await request(app.getHttpServer())
+      .put(`/users/${user.id.toValue()}`)
+      .send({
+        name: editedName,
+      });
+
+    expect(response.statusCode).toBe(204);
+
+    const userOnDatabase = await prisma.user.findUnique({
+      where: {
+        id: user.id.toString(),
+      },
+    });
+
+    expect(userOnDatabase.name).toEqual(editedName);
+  });
+});
