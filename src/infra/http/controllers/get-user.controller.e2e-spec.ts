@@ -26,7 +26,7 @@ describe('Create User (E2E)', () => {
     await app.init();
   });
 
-  test('[GET] /users/:userId', async () => {
+  test('[GET] /users', async () => {
     const user = await userFactory.makePrismaUser();
 
     const accessToken = jwt.sign({ uid: user.id.toString() });

@@ -13,7 +13,7 @@ describe('Delete User', () => {
     sut = new DeleteUserByIdUseCase(inMemoryUsersRepository);
   });
 
-  it('should be able to delete a user', async () => {
+  it('should be able to delete a user by their id', async () => {
     const user = makeUser();
 
     await inMemoryUsersRepository.create(user);

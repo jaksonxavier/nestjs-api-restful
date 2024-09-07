@@ -14,7 +14,7 @@ describe('Get User by ID', () => {
     sut = new GetUserByIdUseCase(inMemoryUsersRepository);
   });
 
-  it('should be able to get a user by ID', async () => {
+  it('should be able to get a user by their id', async () => {
     const user = makeUser();
     await inMemoryUsersRepository.create(user);
 
