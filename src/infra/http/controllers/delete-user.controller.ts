@@ -1,4 +1,4 @@
-import { DeleteUserByIdUseCase } from '@domain/use-cases/delete-user-by-id.use-case';
+import { DeleteUserByIdUseCase } from '@application/use-cases/delete-user-by-id.use-case';
 import {
   Controller,
   Delete,

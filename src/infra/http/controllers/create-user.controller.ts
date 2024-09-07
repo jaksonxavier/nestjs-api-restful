@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { z } from 'zod';
 import { ZodValidationPipe } from '../pipes/zod-validation-pipe';
-import { CreateUserUseCase } from '@domain/use-cases/create-user.use-case';
+import { CreateUserUseCase } from '@application/use-cases/create-user.use-case';
 
 const createUserBodySchema = z.object({
   name: z.string(),

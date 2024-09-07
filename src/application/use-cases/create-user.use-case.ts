@@ -1,6 +1,6 @@
 import { Either, left, right } from '@core/either';
-import { UsersRepository } from '../repositories/users.repository';
-import { User } from '../entities/user.entity';
+import { UsersRepository } from '@domain/repositories/users.repository';
+import { User } from '@domain/entities/user.entity';
 import { UserAlreadyRegisteredError } from './errors/user-already-registered.error';
 import { Injectable } from '@nestjs/common';
 

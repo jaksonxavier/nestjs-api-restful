@@ -1,4 +1,4 @@
-import { GetUserByIdUseCase } from '@domain/use-cases/get-user-by-id.use-case';
+import { GetUserByIdUseCase } from '@application/use-cases/get-user-by-id.use-case';
 import {
   Controller,
   Get,

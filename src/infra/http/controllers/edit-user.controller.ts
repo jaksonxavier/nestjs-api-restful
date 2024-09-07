@@ -1,4 +1,4 @@
-import { EditUserUseCase } from '@domain/use-cases/edit-user.use-case';
+import { EditUserUseCase } from '@application/use-cases/edit-user.use-case';
 import {
   Body,
   Controller,
