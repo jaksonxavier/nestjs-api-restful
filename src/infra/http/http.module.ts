@@ -1,4 +1,9 @@
-import { Module } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
 import { CreateUserController } from './controllers/create-user.controller';
 import { DatabaseModule } from '../database/database.module';
 import { CreateUserUseCase } from '@application/use-cases/create-user.use-case';
@@ -12,6 +17,7 @@ import { CryptographyModule } from '@infra/cryptography/cryptography.module';
 import { AuthModule } from '@infra/auth/auth.module';
 import { AuthController } from './controllers/auth.controller';
 import { AuthUserUseCase } from '@application/use-cases/auth-user.use-case';
+import { LoggerMiddleware } from './middlewares/logger.middleware';
 
 @Module({
   imports: [DatabaseModule, CryptographyModule, AuthModule],
@@ -30,4 +36,10 @@ import { AuthUserUseCase } from '@application/use-cases/auth-user.use-case';
     AuthUserUseCase,
   ],
 })
-export class HttpModule {}
+export class HttpModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(LoggerMiddleware)
+      .forRoutes({ path: '*', method: RequestMethod.ALL });
+  }
+}
