@@ -2,6 +2,7 @@ import { Either, left, right } from '@core/either';
 import { ResourceNotFoundError } from '@core/errors/errors/resource-not-found.error';
 import { User } from '@domain/entities/user.entity';
 import { UsersRepository } from '@domain/repositories/users.repository';
+import { Injectable } from '@nestjs/common';
 
 interface EditUserUseCaseInput {
   userId: string;
@@ -10,6 +11,7 @@ interface EditUserUseCaseInput {
 
 type EditUserUseCaseOutput = Either<ResourceNotFoundError, User>;
 
+@Injectable()
 export class EditUserUseCase {
   constructor(private readonly usersRepository: UsersRepository) {}
 
