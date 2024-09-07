@@ -32,7 +32,7 @@ describe('Create User (E2E)', () => {
     const accessToken = jwt.sign({ uid: user.id.toString() });
 
     const response = await request(app.getHttpServer())
-      .get(`/users/${user.id.toValue()}`)
+      .get('/users')
       .set('Authorization', `Bearer ${accessToken}`)
       .send();
 
