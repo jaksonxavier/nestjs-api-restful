@@ -21,6 +21,14 @@ export class User extends Entity<UserProps> {
     this.props.name = value;
   }
 
+  get slug() {
+    return this.props.slug;
+  }
+
+  get password() {
+    return this.props.password;
+  }
+
   static create(props: UserProps, id?: UniqueEntityID) {
     const user = new User(props, id);
 
