@@ -9,6 +9,7 @@ import {
 import { z } from 'zod';
 import { ZodValidationPipe } from '../pipes/zod-validation-pipe';
 import { CreateUserUseCase } from '@application/use-cases/create-user.use-case';
+import { Public } from '@infra/auth/public';
 
 const createUserBodySchema = z.object({
   name: z.string(),
@@ -18,6 +19,7 @@ const createUserBodySchema = z.object({
 
 type CreateUserBodySchema = z.infer<typeof createUserBodySchema>;
 
+@Public()
 @Controller('/users')
 export class CreateUserController {
   constructor(private readonly createUserUseCase: CreateUserUseCase) {}

@@ -6,10 +6,12 @@ import { HttpModule } from '../http.module';
 import { UserFactory } from '@test/factories/make-user.factory';
 import { DatabaseModule } from '@infra/database/database.module';
 import { PrismaService } from '@infra/database/prisma/prisma.service';
+import { JwtService } from '@nestjs/jwt';
 
 describe('Delete User (E2E)', () => {
   let app: INestApplication;
   let prisma: PrismaService;
+  let jwt: JwtService;
   let userFactory: UserFactory;
 
   beforeAll(async () => {
@@ -21,6 +23,7 @@ describe('Delete User (E2E)', () => {
     app = moduleRef.createNestApplication();
 
     prisma = moduleRef.get(PrismaService);
+    jwt = moduleRef.get(JwtService);
     userFactory = moduleRef.get(UserFactory);
 
     await app.init();
@@ -29,8 +32,11 @@ describe('Delete User (E2E)', () => {
   test('[DELETE] /users/:userId', async () => {
     const user = await userFactory.makePrismaUser();
 
+    const accessToken = jwt.sign({ uid: user.id.toString() });
+
     const response = await request(app.getHttpServer())
       .delete(`/users/${user.id.toValue()}`)
+      .set('Authorization', `Bearer ${accessToken}`)
       .send();
 
     expect(response.statusCode).toBe(200);
