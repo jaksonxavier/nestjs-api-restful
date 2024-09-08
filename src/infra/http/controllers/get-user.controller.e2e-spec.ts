@@ -2,10 +2,9 @@ import { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 
 import * as request from 'supertest';
-import { HttpModule } from '../http.module';
 import { UserFactory } from '@test/factories/make-user.factory';
-import { DatabaseModule } from '@infra/database/database.module';
 import { JwtService } from '@nestjs/jwt';
+import { TestModule } from '@test/test.module';
 
 describe('Create User (E2E)', () => {
   let app: INestApplication;
@@ -14,7 +13,7 @@ describe('Create User (E2E)', () => {
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
-      imports: [HttpModule, DatabaseModule],
+      imports: [TestModule],
       providers: [UserFactory],
     }).compile();
 

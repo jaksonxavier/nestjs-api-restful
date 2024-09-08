@@ -4,6 +4,7 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 
 import { base64Encode } from '@shared/base64-encode';
 import { AuthUser } from '../auth-user';
+import { EnvService } from '@infra/env/env.service';
 
 type Payload = {
   uid: string;
@@ -11,11 +12,13 @@ type Payload = {
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor() {
+  constructor(config: EnvService) {
+    const publicKey = config.get('JWT_PUBLIC_KEY');
+
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
-      secretOrKey: base64Encode(process.env.JWT_PUBLIC_KEY),
+      secretOrKey: base64Encode(publicKey),
       algorithms: ['RS256'],
     });
   }

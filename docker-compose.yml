@@ -2,14 +2,14 @@ version: '3.8'
 
 services:
   postgres:
-    container_name: nestjs-api-restful
+    container_name: '${APP_NAME}_postgresql'
     image: postgres
     ports:
-      - 5432:5432
+      - ${DATABASE_PORT}:5432
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: docker
-      POSTGRES_DB: app
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASS}
+      POSTGRES_DB: ${DATABASE_NAME}
       PGDATA: /data/postgres
     volumes:
       - ./data/pg:/data/postgres

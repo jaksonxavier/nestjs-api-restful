@@ -18,9 +18,10 @@ import { AuthModule } from '@infra/auth/auth.module';
 import { AuthController } from './controllers/auth.controller';
 import { AuthUserUseCase } from '@application/use-cases/auth-user.use-case';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
+import { EnvModule } from '@infra/env/env.module';
 
 @Module({
-  imports: [DatabaseModule, CryptographyModule, AuthModule],
+  imports: [DatabaseModule, CryptographyModule, AuthModule, EnvModule],
   controllers: [
     CreateUserController,
     GetUserController,
