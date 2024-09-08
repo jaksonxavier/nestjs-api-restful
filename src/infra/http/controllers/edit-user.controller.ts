@@ -4,12 +4,12 @@ import {
   Controller,
   HttpCode,
   NotFoundException,
-  Param,
-  ParseUUIDPipe,
   Put,
 } from '@nestjs/common';
 import { z } from 'zod';
 import { ZodValidationPipe } from '../pipes/zod-validation-pipe';
+import { AuthUser } from '@infra/auth/auth-user';
+import { CurrentUser } from '@infra/auth/current-user.decorator';
 
 const editUserBodySchema = z.object({
   name: z.string(),
@@ -23,10 +23,10 @@ type EditUserBodySchema = z.infer<typeof editUserBodySchema>;
 export class EditUserController {
   constructor(private readonly editUserUseCase: EditUserUseCase) {}
 
-  @Put('/:userId')
+  @Put()
   @HttpCode(204)
   async update(
-    @Param('userId', new ParseUUIDPipe()) userId: string,
+    @CurrentUser() { userId }: AuthUser,
     @Body(bodyValidationPipe) body: EditUserBodySchema,
   ) {
     const { name } = body;

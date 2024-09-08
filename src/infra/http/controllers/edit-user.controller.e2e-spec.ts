@@ -28,7 +28,7 @@ describe('Edit User (E2E)', () => {
     await app.init();
   });
 
-  test('[PUT] /users/:userId', async () => {
+  test('[PUT] /users', async () => {
     const user = await userFactory.makePrismaUser({
       name: 'Robin',
     });
@@ -37,7 +37,7 @@ describe('Edit User (E2E)', () => {
 
     const editedName = 'Nico Robin';
     const response = await request(app.getHttpServer())
-      .put(`/users/${user.id.toValue()}`)
+      .put('/users')
       .set('Authorization', `Bearer ${accessToken}`)
       .send({
         name: editedName,
