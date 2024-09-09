@@ -39,6 +39,7 @@ When you use this template, try follow the checklist to update your info properl
 ```bash
 # 4. Run development server and open http://localhost:3333
 pnpm start:dev
+# 5. Read the documentation linked below for "Setup and development".
 ```
 
 ### Build
