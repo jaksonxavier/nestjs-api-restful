@@ -85,5 +85,8 @@
       "^@shared/(.*)$": "<rootDir>/../src/shared/$1",
       "^@test/(.*)$": "<rootDir>/../test/$1"
     }
+  },
+  "engines": {
+    "node": ">=20.14.0"
   }
 }
