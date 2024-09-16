@@ -1,11 +1,13 @@
 import { Entity } from '@core/entities/entity';
 import { UniqueEntityID } from '@core/entities/unique-entity-id';
+import { UserStatus } from './types/user-status.type';
 
 export interface UserProps {
   name: string;
   slug: string;
   email: string;
   password: string;
+  status?: UserStatus;
 }
 
 export class User extends Entity<UserProps> {
@@ -27,6 +29,10 @@ export class User extends Entity<UserProps> {
 
   get password() {
     return this.props.password;
+  }
+
+  get status() {
+    return this.props.status;
   }
 
   static create(props: UserProps, id?: UniqueEntityID) {

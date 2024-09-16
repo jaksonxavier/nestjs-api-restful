@@ -13,12 +13,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum UserStatus {
+  PENDING_VERIFICATION // Newly registered user, awaiting email confirmation
+  ACTIVE // User with confirmed email and active account
+  DEACTIVATED // User has deactivated account but can still reactivate
+  PERMANENTLY_DELETED // Account permanently deleted
+}
+
 model User {
-  id       String @id @default(uuid())
+  id       String     @id @default(uuid())
   name     String
-  slug     String @unique
-  email    String @unique
+  slug     String     @unique
+  email    String     @unique
   password String
+  status   UserStatus @default(PENDING_VERIFICATION)
 
   created_at DateTime @default(now())
   updated_at DateTime @default(now()) @updatedAt
